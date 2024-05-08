@@ -18,6 +18,10 @@ const LascadeUserSchema =  mongoose.Schema({
         type:Boolean,
         
     },
+    authenticated:{
+        type:Boolean,
+        default:false
+    }
    
    
 

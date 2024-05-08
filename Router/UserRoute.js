@@ -1,9 +1,13 @@
 const express           = require('express');
 const userRoute         = express();
-const multer            = require('multer')
-const path          = require('path')
+const path              = require('path')
 const userController    = require("../Controller/userController")
+const csvController     = require("../Controller/csvController")
 const auth              = require('../Middleware/authentication') 
+const multer            = require('multer');
+const csvParser         = require('csv-parser');
+const fs                = require('fs');
+
 
 userRoute.use(express.json());
 userRoute.use(express.urlencoded({ extended: true }))
@@ -12,30 +16,33 @@ userRoute.use(express.static("public"))
 const Authentication = auth("User")
 
 
-const storage = multer.diskStorage({
+/*Multer configuration*/
+const storage= multer.diskStorage({
     destination:(req,file,cb)=>{
-        cb(null,"../Frontend/public")
+        cb(null,"./uploads");
     },
     filename:(req,file,cb)=>{
-        cb(null,file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+        let name = file.originalname.split(" ").join("_").toLowerCase()
+        cb(null,name)
+
     }
 })
 
-
 const upload = multer({
     storage:storage,
-    limits: { fieldSize: 2 * 1024 * 1024 }
-
 })
 
-userRoute.get("/",Authentication)
 
+
+/*################   ROUTES   ################*/
+// userRoute.get("/",Authentication)
 // userRoute.get("/checkAuth",Authentication,userController.checkAuth);
 
+userRoute.post("/upload",upload.single("csvfile"),csvController.csvUpload)
 
 userRoute.post("/register", userController.register);
 userRoute.post("/login", userController.login);
 
-
+ 
 
 module.exports = userRoute

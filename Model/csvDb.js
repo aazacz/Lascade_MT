@@ -4,7 +4,7 @@ const csvSchema = mongoose.schema(
     {
 userId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "customerdetail",
+            ref: "lascadeUser",
             required: false },
  index:Number,
  customerId: {

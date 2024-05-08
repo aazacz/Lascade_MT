@@ -6,6 +6,9 @@ const validateInput = require("../Helper/validation")
 const { jwtsecretUser, EXPIRES_IN } = process.env;
 
 
+
+
+
 /*#########################    FUNCTION FOR PASSWORD HASHING  ############################### */ 
 const passwordHash = async (password) => {
             try {
