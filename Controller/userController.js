@@ -46,9 +46,8 @@ const login = async (req, res) => {
                 try { 
             
                 const useremail = req.body.email
-                const user = await User.findOne({ email: req.body.email }).catch((err) => {
-                            return res.status(500).json({ message: err.message})
-                })
+                const user = await User.findOne({ email: req.body.email });
+                
             
 // if user not found in DataBase            
                 if (!user) {  
