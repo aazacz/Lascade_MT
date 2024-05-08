@@ -2,26 +2,25 @@ const mongoose = require("mongoose")
 
 const csvSchema = mongoose.schema(
     {
-userId: {
-            type: mongoose.Schema.Types.ObjectId,
+index: {    type: mongoose.Schema.Types.ObjectId,
             ref: "lascadeUser",
             required: false },
  index:Number,
- customerId: {
+ customer_id: {
             type: String,
              unique: true  },
- FirstName:String,
- LastName:String,
- Company:String,
+ first_name:String,
+ last_name:String,
+ company:String,
  city: String,
  country: String,
- phone1: String,
- phone2: String,
+ phone_1: String,
+ phone_2: String,
  email: {
     type: String,
     unique: true
 },
-subscriptionDate: Date,
+subscription_date: Date,
 website: String
 
     }
