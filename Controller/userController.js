@@ -19,29 +19,13 @@ const passwordHash = async (password) => {
                 }
             };
       
-            
- const verifyToken = (token) => {
-                const userVer = jwt.verify(token, "lascadeUser")
-            }
+
 const checkAuth = (req,res)=>{
               res.status(200).json("You are authenticated to access this part of the Web")
 }
   
 
-// const checkAuth = async (req, res) => {
-//                 try {
-//                 console.log("debug 6");
-//                 if (req.role === "User") {
-//                     console.log("debug 7");
-//                     res.status(200).json({ message: "Authorised" });
-//                 } else {
-//                     res.status(403).json({ message: "Access Denied" });
-//                 }
-//                 } catch (error) {
-//                 console.error("Error in checkAuth:", error);
-//                 res.status(500).json({ message: "Internal Server Error" });
-//                 }
-//             };
+
 
 
 
@@ -87,8 +71,6 @@ const login = async (req, res) => {
                 else {   
                     return res.json({status: "failed", message: "Password is incorrect"})
                  }
-            
-            
                 }
                 catch (error) {
                     console.log(error);
@@ -106,7 +88,7 @@ const register = async (req, res) => {
                 const passwordbcrypt = await passwordHash(password);
                 console.log(email, name, password);
 
-    /*_Validate input_*/
+    /*_Validate input---Checks For validation errors in Email, Password and Name which entered_*/
                 const validationError = validateInput(email, name, password);
                 if (validationError) {
                  return res.status(400).json({ error: validationError });
@@ -129,7 +111,7 @@ const register = async (req, res) => {
                 })
              
                 const newData = await newUser.save();
-                console.log(newData);
+               
                 res.status(200).json({ status: "success", message: "User registered successfully" });
                 } catch (error) {
                
@@ -141,7 +123,6 @@ const register = async (req, res) => {
   
 
   module.exports = {
-
     login,
     register,
     checkAuth,

@@ -29,28 +29,27 @@ const  uploadFile = (req, res, next)=> {
             if(err.message === "Unexpected field"){
                return res.status(400).json({Error:"Please check the uploaded file, Upload one file only"})
             }
-                     
         } 
-        
+//   if no file is uploaded
         if(req.file===undefined){
            return res.status(409).json({Error:"No file uploaded"})
         }
 
+//   if wrong file type is uploaded
         if(req.file.mimetype !=="text/csv"){
-            // throw new Error("Wrong File type")
            return res.status(409).json({Error:"Wrong File type"})
         }
 
         const { originalname } = req.file;
         const file = req.file
         const uploadUserId = req.userId 
-        // console.log(originalname,file,uploadUserId);
+        
 
         await csvUploadQueue.add({ uploadUserId, originalname, file, },{
             attempts: 4, //  retry attempts
             backoff: {
-                type: 'exponential', // Exponential backoff strategy
-                delay: 1500, // Delay between retries
+                type: 'exponential',
+                delay: 1500, 
             },
         })
 
