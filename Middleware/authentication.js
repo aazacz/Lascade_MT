@@ -38,6 +38,7 @@ const auth = (role) => (req, res, next) => {
  // OR CHECK WHETHER THE EMAIL IN JWT AND THE EMAIL IN DATABASE ARE SAME                              
                     if (data && data.length > 0 && data[0].authenticated === true && (decoded._id === req.body.email || decoded._id===data[0].email)) {
                             req.authUser = data[0];
+                            console.log(data[0]);
                             req.userId = decoded._id
                             req.role = decoded.role
                             next()

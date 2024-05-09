@@ -20,7 +20,7 @@ const csvUpload = async(req,res)=>{
 
 
         csvUploadQueue.on('completed', (job,result) => {
-            console.log(job);
+            // console.log(job);
             console.log(`Job ID ${job.id} completed with result:`, result);
           });
 

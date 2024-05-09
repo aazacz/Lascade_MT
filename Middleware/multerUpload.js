@@ -1,9 +1,7 @@
 const multer            = require('multer');
 require("dotenv").config
 const csvUploadQueue = require('../Processor/csvQueue');
-const path              = require('path')
 
-const {redisPort,redisHost} = process.env;
 
 
 /*Multer configuration*/
@@ -42,11 +40,11 @@ const  uploadFile = (req, res, next)=> {
             // throw new Error("Wrong File type")
            return res.status(409).json({Error:"Wrong File type"})
         }
-console.log("1");
+
         const { originalname } = req.file;
         const file = req.file
         const uploadUserId = req.userId 
-        console.log(originalname,file,uploadUserId);
+        // console.log(originalname,file,uploadUserId);
 
         await csvUploadQueue.add({ uploadUserId, originalname, file, },{
             attempts: 4, //  retry attempts
