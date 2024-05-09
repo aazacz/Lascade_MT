@@ -8,7 +8,7 @@ userid: {    type: mongoose.Schema.Types.ObjectId,
  index:Number,
  customer_id: {
             type: String,
-             unique: true  },
+             },
  first_name:String,
  last_name:String,
  company:String,
@@ -18,7 +18,7 @@ userid: {    type: mongoose.Schema.Types.ObjectId,
  phone_2: String,
  email: {
     type: String,
-    unique: true
+   
 },
 subscription_date: Date,
 website: String
