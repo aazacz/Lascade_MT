@@ -1,12 +1,8 @@
 const express           = require('express');
-const csv               = require("csvtojson")
-const csvDb             = require("../Model/csvDb")
 const Queue             = require("bull")
 require("dotenv").config
 const {redisPort,redisHost} = process.env;
-const { v4: uuidv4 }    = require('uuid');
 const path = require("path")
-// const csv = require("../Processor/csvUploadProcessor")
 
 const csvUploadQueue = new Queue("csvQueue",{
     redis: {
