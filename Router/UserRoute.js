@@ -5,13 +5,8 @@ const userController    = require("../Controller/userController")
 const csvController     = require("../Controller/csvController")
 const auth              = require('../Middleware/authentication') 
 const multer            = require('multer');
-const csvParser         = require('csv-parser');
-const fs                = require('fs');
-
-const Queue             = require("bull")
 require("dotenv").config
-const {redisPort,redisHost} = process.env;
-const { v4: uuidv4 }    = require('uuid');
+
 
 userRoute.use(express.json());
 userRoute.use(express.urlencoded({ extended: true }))

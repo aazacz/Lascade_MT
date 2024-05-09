@@ -13,7 +13,12 @@ const csvUploadQueue = new Queue("csvQueue",{
 
 const csvUpload = async(req,res)=>{
     try {
-     
+        if(req.file===undefined){
+            throw new Error("No file uploaded");
+        }
+        if(req.file.mimetype !=="application/csv"){
+            throw new Error("Wrong File type")
+        }
         const { originalname, filename } = req.file;
         const file = req.file
         // const jobId = uuidv4(); // Generate unique job ID
@@ -36,7 +41,16 @@ const csvUpload = async(req,res)=>{
         // res.json(jsonArray)
 
     } catch (error) {
-        console.log("Upload error" +error);
+        console.log("Upload error  " +error);
+       
+        if(error.message=== "Wrong File type"){
+            
+            return res.status(404).json({Error:"Wrong file type attached, Please upload a CSV File"}) 
+        }
+        else if(error.message==="No file uploaded"){
+
+            return res.status(404).json({Error:"No File Attached"})
+        }
     }
 }
 
