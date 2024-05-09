@@ -23,23 +23,25 @@ const passwordHash = async (password) => {
  const verifyToken = (token) => {
                 const userVer = jwt.verify(token, "lascadeUser")
             }
-
+const checkAuth = (req,res)=>{
+              res.status(200).json("You are authenticated to access this part of the Web")
+}
   
 
-const checkAuth = async (req, res) => {
-                try {
-                console.log("debug 6");
-                if (req.role === "User") {
-                    console.log("debug 7");
-                    res.status(200).json({ message: "Authorised" });
-                } else {
-                    res.status(403).json({ message: "Access Denied" });
-                }
-                } catch (error) {
-                console.error("Error in checkAuth:", error);
-                res.status(500).json({ message: "Internal Server Error" });
-                }
-            };
+// const checkAuth = async (req, res) => {
+//                 try {
+//                 console.log("debug 6");
+//                 if (req.role === "User") {
+//                     console.log("debug 7");
+//                     res.status(200).json({ message: "Authorised" });
+//                 } else {
+//                     res.status(403).json({ message: "Access Denied" });
+//                 }
+//                 } catch (error) {
+//                 console.error("Error in checkAuth:", error);
+//                 res.status(500).json({ message: "Internal Server Error" });
+//                 }
+//             };
 
 
 

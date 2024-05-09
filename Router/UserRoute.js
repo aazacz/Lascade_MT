@@ -8,6 +8,10 @@ const multer            = require('multer');
 const csvParser         = require('csv-parser');
 const fs                = require('fs');
 
+const Queue             = require("bull")
+require("dotenv").config
+const {redisPort,redisHost} = process.env;
+const { v4: uuidv4 }    = require('uuid');
 
 userRoute.use(express.json());
 userRoute.use(express.urlencoded({ extended: true }))
@@ -38,7 +42,8 @@ const upload = multer({
 // userRoute.get("/",Authentication)
 // userRoute.get("/checkAuth",Authentication,userController.checkAuth);
 
-userRoute.post("/upload",upload.single("csvfile"),csvController.csvUpload)
+userRoute.get("/upload",Authentication,userController.checkAuth)
+userRoute.post("/upload",Authentication,upload.single("csvfile"),csvController.csvUpload)
 
 userRoute.post("/register", userController.register);
 userRoute.post("/login", userController.login);

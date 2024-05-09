@@ -1,6 +1,6 @@
 const express = require("express")
 const jwt = require('jsonwebtoken')
-
+const userDb = require("../Model/userDb")
 
 const auth = (role) => (req, res, next) => {
 
@@ -8,20 +8,17 @@ const auth = (role) => (req, res, next) => {
     console.log("role   " + role)
 
     if (role === "User") {
-        // console.log("req   "+JSON.stringify(req.headers, null, 2));
-        // console.log(req.headers.authorization);
-        console.log("debug 2");
-        const token = req.headers.authorization
-        // console.log("token in the auth section " + token);
+        console.log(req.headers.authorization);
+        const token = req.headers.authorization.split("Bearer ").join("")
        
         if (!token) {
-            console.log("debug 3");
-            console.log("not authorised NJS");
+            // console.log("3");
+            // console.log("not JWT recceived");
             return res.json({ message: "Not Authorised" })
         }
         else {
-            console.log("debug 4");
-            console.log("authorised");
+            // console.log("4");
+            // console.log("authorised");
             jwt.verify(token, process.env.jwtsecretUser, (err, decoded) => {
                 if (err) {
                     console.log(err + "  not authorised agaiun");
@@ -34,10 +31,19 @@ const auth = (role) => (req, res, next) => {
                 }
                 else {
                     console.log("debug 5");
-                    console.log("authorised again");
-
-                    console.log(decoded.role);
-                    console.log(decoded._id);
+                    const email = decoded._id
+                    const authUser = userDb.find({email:email,authenticated:true})
+                    authUser.then((data)=> {
+                            // console.log(data);
+                            if (data && data[0].authenticated == true) {
+                                    req.authUser = data[0];
+                                    // console.log("user is authenticated to upload");
+                                                                             }
+                                        else{
+                                            return res.status(401).send({message:"This User is not authencticated to access this page"});
+                                                }
+                                                }
+                                            )   
                     if (decoded.role === role) {
                         req.userId = decoded._id
                         req.role = decoded.role

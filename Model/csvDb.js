@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
-const csvSchema = mongoose.schema(
+const csvSchema = mongoose.Schema(
     {
-index: {    type: mongoose.Schema.Types.ObjectId,
+userid: {    type: mongoose.Schema.Types.ObjectId,
             ref: "lascadeUser",
             required: false },
  index:Number,
@@ -25,3 +25,6 @@ website: String
 
     }
 )
+
+const csvCustomerSchema = new mongoose.model("csvCustomerSchema",csvSchema)
+module.exports=csvCustomerSchema
