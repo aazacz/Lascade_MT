@@ -16,7 +16,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/user', userRoute)
 
 app.get("/",(req,res)=>{
-    res.status(200).json({Success:"Welcome, This is the success response for HomeRoute"})
+    res.status(200).json({Success:"Welcome, This is the success response for HomePage",
+                        
+                            })
 })
  
 
