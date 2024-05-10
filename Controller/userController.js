@@ -83,7 +83,7 @@ const login = async (req, res) => {
 /*#######################################    USER REGISTRATION   ######################################### */ 
 const register = async (req, res) => {
                 try {
-                const { email, name, password } = req.body;
+                const { email, name, password,authenticated } = req.body;
                 
                 const passwordbcrypt = await passwordHash(password);
                 console.log(email, name, password);
@@ -108,16 +108,16 @@ const register = async (req, res) => {
                     email: email,
                     name: name,
                     password: passwordbcrypt,
-                    authenticated:true
+                    authenticated:authenticated
                 })
              
                 const newData = await newUser.save();
                 console.log(newData);
 
-                newData.authenticated?
-                res.status(200).json({ status: "success", Authorisation:true,message: "User registered successfully, This user is authorised to do the CSV uploading" })
-                :
-                res.status(200).json({ status: "success", Authorisation:false,message: "User registered successfully, This user is Not Authorised for CSV uploading" })
+                if(newData.authenticated===true){
+                   return res.status(200).json({ status: "success",authenticated:true, message: "User registered successfully, This user is authorised to do the CSV uploading" });
+                }
+                res.status(200).json({ status: "success",authenticated:false, message: "User registered successfully, This user is Not Authorised for CSV uploading" });
 
                 } catch (error) {
                

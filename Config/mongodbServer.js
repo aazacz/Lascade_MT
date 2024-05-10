@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
  require('dotenv').config()  //env
 
- const {mongooseConnectionId,mongoosePassword} = process.env;
+//  const {mongooseConnectionId,mongoosePassword} = process.env;
 
- const password = encodeURIComponent(mongoosePassword);
+//  const password = encodeURIComponent(mongoosePassword);
 
-//connection Id for Atlas
-const connection = `mongodb+srv://abinbabz01:${password}${mongooseConnectionId}`;
+// //connection Id for Atlas
+// const connection = `mongodb+srv://abinbabz01:${password}${mongooseConnectionId}`;
 
 //connection Id for Mongodb Local
-// const connection =  'mongodb://127.0.0.1:27017/lascade?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5';
+const connection =  'mongodb://127.0.0.1:27017/lascade?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5';
  
 
  
