@@ -112,8 +112,13 @@ const register = async (req, res) => {
                 })
              
                 const newData = await newUser.save();
-               
-                res.status(200).json({ status: "success", message: "User registered successfully" });
+                console.log(newData);
+
+                newData.authenticated?
+                res.status(200).json({ status: "success", Authorisation:true,message: "User registered successfully, This user is authorised to do the CSV uploading" })
+                :
+                res.status(200).json({ status: "success", Authorisation:false,message: "User registered successfully, This user is Not Authorised for CSV uploading" })
+
                 } catch (error) {
                
                     console.error("Error during user registration:", error.message);
