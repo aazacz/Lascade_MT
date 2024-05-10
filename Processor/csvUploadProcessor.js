@@ -36,7 +36,7 @@ try {
       .catch((error) => {
         console.error('MongoDB connection error:', error);
       });
-
+const db= connectToMongoDB.db(lascade)
 
 //  inserting the JSON datas from the CSV to mongoDb
     const dbupload = await csvDb.insertMany(jsonArray)       

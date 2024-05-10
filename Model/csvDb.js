@@ -2,9 +2,6 @@ const mongoose = require("mongoose")
 
 const csvSchema = mongoose.Schema(
     {
-userid: {    type: mongoose.Schema.Types.ObjectId,
-            ref: "lascadeUser",
-            required: false },
  index:Number,
  customer_id: {
             type: String,
