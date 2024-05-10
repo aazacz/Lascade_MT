@@ -1,36 +1,31 @@
-require("dotenv").config
-const path = require("path")
-const csvUploadQueue = require('../Processor/csvQueue');
+require("dotenv").config(); 
+const path = require("path");
+const csvUploadQueue = require('../Processor/csvQueue'); 
 
 
-
-
-const csvUpload = async(req,res)=>{
+// Function for handling CSV uploads
+const csvUpload = async (req, res) => {
     try {
-       
-        csvUploadQueue.process(path.join(__dirname,"../Processor/csvUploadProcessor"))
+        // Process the CSV upload queue using the specified processor
+        csvUploadQueue.process(path.join(__dirname, "../Processor/csvUploadProcessor"));
 
-
-        csvUploadQueue.on('completed', (job,result) => {
-            // console.log(job);
+        // Event listeners for when jobs are completed or failed
+        csvUploadQueue.on('completed', (job, result) => {
             console.log(`Job ID ${job.id} completed with result:`, result);
-          });
+        });
 
         csvUploadQueue.on('failed', (job, err) => {
             console.error(`Job ID ${job.id} failed with error:`, err);
-          });
+        });
 
-        // const result = await job.finished();
-          res.status(200).send("File is Uploaded");
-     
+        // Respond with success message if no errors occurred
+        res.status(200).send("File is Uploaded");
 
     } catch (error) {
-        console.log("Upload error  " +error);
-       
-      
+        // Handle errors that occur during upload process
+        console.log("Upload error: " + error);
     }
 }
 
 
-
-module.exports= {csvUpload}
+module.exports = { csvUpload };
