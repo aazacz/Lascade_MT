@@ -74,10 +74,24 @@ Follow these steps in postman👇👇
 ## Running the API in Postman.
 
 1. In the database sample user accounts are already created
+2. password is always **qwerty**
+3. For logging in use the following account types
 
+| Authorised Account | |
+| --- | --- |
+| name | abhilash |
+| email | temp@gmail.com |
+| password | qwerty |
+| authenticated | true |
+
+
+| Unauthorised Account | |
+| --- | --- |
+| name | abhilash |
+| email | temp1@gmail.com |
+| password | qwerty |
+| authenticated | false |
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-
-## Acknowledgments
