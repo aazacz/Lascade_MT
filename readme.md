@@ -13,6 +13,7 @@ No installation of packages are required. The project is deployed in AWS server
 
 1. Postman
 2. Pem Key for secure access to the EC2 Server
+3. **PEM File is uploaded in the project root folder**
 
 ## Packages Used / Software Dependencies
 1. **Multer**: Middleware for handling multipart/form-data, typically used for file uploads in Node.js applications.
