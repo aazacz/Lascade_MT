@@ -18,6 +18,6 @@ app.use('/user', userRoute)
 app.get("/",(req,res)=>{
     res.status(200).json({Success:"Welcome, This is the success response for HomeRoute"})
 })
-
+ 
 
 app.listen(PORT, () => console.log('Server is running on PORT:3000'))

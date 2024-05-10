@@ -107,7 +107,8 @@ const register = async (req, res) => {
                 const newUser = new User({
                     email: email,
                     name: name,
-                    password: passwordbcrypt
+                    password: passwordbcrypt,
+                    authenticated:true
                 })
              
                 const newData = await newUser.save();
